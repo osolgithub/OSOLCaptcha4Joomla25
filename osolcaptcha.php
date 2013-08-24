@@ -603,8 +603,15 @@ class plgSystemOSOLCaptcha extends JPlugin
 					return $skipForm;
 				
 		}
+		function isAdminPage()
+		{
+			/*$pathArray = preg_split("~/~",JURI::base());//fix provided by Gruz from ukraine on 5th september 2010
+			$isAdmin = ($pathArray[(count($pathArray) - 2)] == "administrator");*/
+			return preg_match("@".preg_quote(DIRECTORY_SEPARATOR)."administrator$@",JPATH_BASE);
+		}
 		function shouldCheckForOSOLCaptcha()
 		{
+			if($this->isAdminPage())return false;
 			/*$currentSession =  & JFactory::getSession() ;
 			$currentSession->set('osolCaptchaIntance'.$GLOBALS['totalCaptchas'], $addToForm);*/
 			$enabledForms = $this->enabledForms;//$this->getEnabledForms();
@@ -700,6 +707,7 @@ class plgSystemOSOLCaptcha extends JPlugin
 		}
 		function shouldInsertOSOLCaptcha()
 		{
+			if($this->isAdminPage())return false;
 			$enabledForms = $this->enabledForms;//$this->getEnabledForms();
 			
 			$enableOnForm = true;
