@@ -660,7 +660,8 @@ class plgSystemOSOLCaptcha extends JPlugin
 						if(JRequest::getVar('osolCatchaTxt','')=='' || (JRequest::getVar('osolCatchaTxtInst','') == ''))
 						//if($_REQUEST['osolCatchaTxt'] == '' || ($_REQUEST['osolCatchaTxtInst'] == ''))
 						{
-							die("You haven't submitted captcha for  $enabledForm ");
+							die("You haven't submitted captcha for  $enabledForm <a href=\"javascript:history.go(-1)\">Go back and submit the form</a>");
+
 						}
 						else
 						{
